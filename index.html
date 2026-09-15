@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1a2e" />
+  <meta name="description" content="Advanced Tic-Tac-Toe with AI, undo, sounds, and more." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>⭕ Tic-Tac-Toe · Advanced Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>⭕ TIC–TAC–TOE <span>3×3</span></h1>
+
+    <!-- Top controls -->
+    <div class="controls-bar">
+      <label class="control-group">
+        <span>🎯 Mode</span>
+        <select id="modeSelect">
+          <option value="ai" selected>vs AI</option>
+          <option value="pvp">vs Player</option>
+        </select>
+      </label>
+      <label class="control-group">
+        <span>⚙️ Difficulty</span>
+        <select id="difficultySelect">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard" selected>Hard</option>
+          <option value="impossible">Impossible</option>
+        </select>
+      </label>
+      <label class="control-group">
+        <span>⏱️ Timer</span>
+        <select id="timerSelect">
+          <option value="0" selected>Off</option>
+          <option value="5">5s</option>
+          <option value="10">10s</option>
+          <option value="15">15s</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Status + Reset -->
+    <div class="status-area">
+      <div class="turn-indicator" id="turnIndicator">
+        <div class="turn-icon x-marker" id="turnIcon">X</div>
+        <span id="turnText">Your turn</span>
+      </div>
+      <div class="button-group">
+        <button class="icon-btn" id="undoBtn" title="Undo (Backspace)">↶</button>
+        <button class="icon-btn" id="redoBtn" title="Redo">↷</button>
+        <button class="reset-btn" id="resetBtn" title="New game">
+          <span>↻</span> New
+        </button>
+      </div>
+    </div>
+
+    <!-- Timer bar -->
+    <div class="timer-bar" id="timerBar">
+      <div class="timer-fill" id="timerFill"></div>
+    </div>
+
+    <!-- Game Board -->
+    <div class="board" id="board" tabindex="0" role="grid" aria-label="Tic-Tac-Toe board"></div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <div class="score-item">👤 <span id="playerLabel">You</span> <span class="score-badge" id="playerScore">0</span></div>
+      <div class="score-item">🤖 <span id="aiLabel">AI</span> <span class="score-badge" id="aiScore">0</span></div>
+      <div class="score-item">🤝 Draw <span class="score-badge" id="drawScore">0</span></div>
+    </div>
+
+    <!-- Message -->
+    <div class="message" id="message"></div>
+    <div class="sub-message" id="subMessage">Use arrow keys + Enter, or click a square</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

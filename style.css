@@ -1,0 +1,406 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(145deg, #0b1a2e 0%, #1b2f47 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+  padding: 16px;
+  margin: 0;
+  color: #d4eaff;
+}
+
+.game-container {
+  background: rgba(18, 30, 45, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 2.5rem;
+  padding: 1.6rem 2rem 2rem;
+  box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.7),
+              inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(120, 180, 255, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  color: #d4eaff;
+  text-shadow: 0 0 10px #3d7eff, 0 0 20px #1e4f9e;
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+h1 span {
+  background: #1e3a5f;
+  padding: 0.1rem 0.8rem;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #b3daff;
+  border: 1px solid #3575c0;
+}
+
+/* ---------- Controls bar ---------- */
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  padding: 0.6rem 0.8rem;
+  background: #0e1b2b;
+  border-radius: 18px;
+  border: 1px solid #2b4d73;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+  color: #8bb4e0;
+  gap: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex: 1;
+  min-width: 90px;
+}
+
+.control-group select {
+  background: #142b40;
+  color: #d4eaff;
+  border: 1px solid #2c4e70;
+  border-radius: 10px;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.control-group select:hover,
+.control-group select:focus {
+  border-color: #5f95d0;
+}
+
+/* ---------- Status area ---------- */
+.status-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0e1b2b;
+  padding: 0.6rem 1rem;
+  border-radius: 60px;
+  margin-bottom: 0.6rem;
+  border: 1px solid #2b4d73;
+  box-shadow: inset 0 2px 5px #00000033, 0 5px 10px #00000030;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.turn-indicator {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #aac9ff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.turn-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  background: #1e2f44;
+  box-shadow: 0 0 8px #2f6fd0;
+}
+
+.turn-icon.x-marker {
+  color: #6ab0ff;
+  text-shadow: 0 0 10px #2f8aff;
+}
+
+.turn-icon.o-marker {
+  color: #ffb86b;
+  text-shadow: 0 0 10px #ff9f2e;
+}
+
+.button-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: #1d3550;
+  border: 1px solid #4c7ab0;
+  color: #e1f0ff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover:not(:disabled) {
+  background: #264e74;
+  border-color: #6fa3e0;
+  transform: translateY(-1px);
+}
+
+.icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.reset-btn {
+  background: #1d3550;
+  border: 1px solid #4c7ab0;
+  color: #e1f0ff;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reset-btn:hover {
+  background: #264e74;
+  border-color: #6fa3e0;
+  transform: translateY(-1px);
+}
+
+/* ---------- Timer bar ---------- */
+.timer-bar {
+  height: 6px;
+  background: #0e1b2b;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.timer-bar.active {
+  opacity: 1;
+}
+
+.timer-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #2ecc71, #f1c40f, #e74c3c);
+  background-size: 300% 100%;
+  border-radius: 10px;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Board ---------- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 1.2rem;
+  outline: none;
+}
+
+.cell {
+  background: #112336;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 12px 0 #080f18, 0 8px 18px #00000070,
+              inset 0 1px 2px #2a4c6e;
+  border: 1px solid #244866;
+  color: white;
+  user-select: none;
+  transform: translateY(-2px);
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.cell:active:not(.disabled) {
+  transform: translateY(6px);
+  box-shadow: 0 4px 0 #080f18, 0 8px 12px #00000070;
+}
+
+.cell.x-move {
+  color: #6ab0ff;
+  text-shadow: 0 0 18px #2f8aff, 0 0 8px #b0d0ff;
+  animation: fadeIn 0.25s ease;
+}
+
+.cell.o-move {
+  color: #ffb86b;
+  text-shadow: 0 0 18px #ff9f2e, 0 0 8px #ffe0b0;
+  animation: fadeIn 0.25s ease;
+}
+
+.cell.winner {
+  background: #1f4d2e;
+  box-shadow: 0 0 18px #2ecc71, 0 12px 0 #0f2b18, 0 8px 18px #00000070;
+  border-color: #48d67a;
+  color: #d4ffd4;
+  animation: pulse 0.9s ease-in-out infinite;
+}
+
+.cell.disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+  transform: translateY(0px);
+  box-shadow: 0 5px 0 #080f18, 0 5px 12px #00000070;
+}
+
+.cell:not(.disabled):hover {
+  background: #19334d;
+  border-color: #3d74a8;
+}
+
+.cell.keyboard-focus {
+  outline: 3px solid #6ab0ff;
+  outline-offset: 2px;
+}
+
+.cell.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* ---------- Scoreboard ---------- */
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  background: #0b1622;
+  padding: 0.6rem 0.8rem;
+  border-radius: 50px;
+  border: 1px solid #2a4560;
+  color: #b8d2f0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: inset 0 0 8px #00000060;
+  gap: 6px;
+}
+
+.score-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.15rem 0.6rem;
+  background: #142b40;
+  border-radius: 30px;
+  border: 1px solid #2c4e70;
+  flex: 1;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.score-badge {
+  background: #1e3f5c;
+  border-radius: 30px;
+  padding: 0.15rem 0.7rem;
+  font-weight: 700;
+  color: #d0e6ff;
+  box-shadow: inset 0 1px 3px #00000070;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ---------- Messages ---------- */
+.message {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #b8d9ff;
+  min-height: 1.6rem;
+  text-shadow: 0 0 6px #1e4f9e;
+}
+
+.sub-message {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #7a9bc0;
+  min-height: 1.1rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 520px) {
+  .game-container {
+    padding: 1.2rem 1rem 1.6rem;
+    border-radius: 1.8rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 span { font-size: 0.85rem; }
+
+  .controls-bar { gap: 6px; padding: 0.5rem; }
+  .control-group { font-size: 0.65rem; min-width: 80px; }
+  .control-group select { font-size: 0.8rem; padding: 0.25rem 0.4rem; }
+
+  .status-area { padding: 0.5rem 0.7rem; }
+  .turn-indicator { font-size: 0.95rem; }
+  .turn-icon { width: 28px; height: 28px; font-size: 1.2rem; }
+  .icon-btn { width: 32px; height: 32px; font-size: 0.95rem; }
+  .reset-btn { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+  .cell { font-size: 2.9rem; border-radius: 16px; }
+  .board { gap: 8px; }
+
+  .scoreboard { font-size: 0.8rem; }
+  .score-item { padding: 0.1rem 0.4rem; gap: 4px; }
+}
+
+@media (max-width: 380px) {
+  .cell { font-size: 2.3rem; }
+  .turn-indicator { font-size: 0.85rem; }
+  .score-item { font-size: 0.7rem; }
+}
