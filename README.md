@@ -13,7 +13,7 @@ A modern, feature-rich Tic-Tac-Toe game built with vanilla HTML, CSS, and JavaSc
 - 💾 Persistent scores
 
 ## 🎮 Play Online
-👉 [Play the game](https://YOUR-USERNAME.github.io/tic-tac-toe/)
+👉 [Play the game](https://2007saurabh.github.io/tic-tac-toee-/)
 
 ## 🚀 Run Locally
 1. Clone the repo: `git clone https://github.com/YOUR-USERNAME/tic-tac-toe.git`
