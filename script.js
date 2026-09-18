@@ -20,6 +20,7 @@
   // Timer
   let timerInterval = null;
   let timerRemaining = 0;
+  let nextGameTimer = null;
 
   // Keyboard focus
   let focusedCell = 0;
@@ -177,6 +178,8 @@
   function undo() {
     if (history.length === 0) return;
     clearTimer();
+    clearTimeout(nextGameTimer);
+    nextGameTimer = null;
     future.push(snapshot());
     restore(history.pop());
     sounds.undo();
@@ -194,6 +197,8 @@
   function redo() {
     if (future.length === 0) return;
     clearTimer();
+    clearTimeout(nextGameTimer);
+    nextGameTimer = null;
     history.push(snapshot());
     restore(future.pop());
     renderBoard();
@@ -486,6 +491,7 @@
         saveScores();
         renderBoard();
         updateUI();
+        scheduleNextGame();
         return true;
       }
     }
@@ -499,6 +505,7 @@
       saveScores();
       renderBoard();
       updateUI();
+      scheduleNextGame();
       return true;
     }
 
@@ -549,8 +556,18 @@
   // ============================================================
   // RESET / NEW GAME
   // ============================================================
+  function scheduleNextGame() {
+    clearTimeout(nextGameTimer);
+    nextGameTimer = setTimeout(() => {
+      nextGameTimer = null;
+      resetGame();
+    }, 2500);
+  }
+
   function resetGame() {
     clearTimer();
+    clearTimeout(nextGameTimer);
+    nextGameTimer = null;
     board = Array(9).fill('');
     currentPlayer = 'X';
     gameActive = true;
@@ -565,6 +582,17 @@
     subMessageEl.textContent = 'Use arrow keys + Enter, or click a square';
     startTimerIfNeeded();
   }
+  
+  self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+      )
+    )
+  );
+  self.clients.claim();
+});
 
   // ============================================================
   // KEYBOARD NAVIGATION
