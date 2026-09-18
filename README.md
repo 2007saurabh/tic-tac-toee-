@@ -16,7 +16,7 @@ A modern, feature-rich Tic-Tac-Toe game built with vanilla HTML, CSS, and JavaSc
 👉 [Play the game](https://2007saurabh.github.io/tic-tac-toee-/)
 
 ## 🚀 Run Locally
-1. Clone the repo: `git clone https://github.com/YOUR-USERNAME/tic-tac-toe.git`
+1. Clone the repo: `git clone https://github.com/2007saurabh/tic-tac-toe.git`
 2. Open `index.html` in your browser.
 
 ## 🛠️ Tech Stack
